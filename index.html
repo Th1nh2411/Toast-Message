@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="fonts/themify-icons-font/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.js">
+</head>
+<body>
+    <div class="" id="toast">
+        
+
+    </div>
+    
+    <div class="btnToast">
+        <div class="btn btn--success">Show success toast</div>
+        <div class="btn btn--error">Show error toast</div>
+
+    </div>
+
+    <script>
+        function toast({
+            title = '',
+            message = '',
+            type = 'info',
+            duration = 3000
+        }){
+            const main = document.querySelector('#toast');
+            
+            const icons = {
+                success: 'ti-check-box',
+                info: 'ti-info-alt',
+                warning: 'ti-alert',
+                error: 'ti-face-sad'
+            }
+            const icon = icons[type]
+            const delay = (duration/1000).toFixed()
+            const toast = document.createElement('div') 
+            console.log(delay)
+            toast.style.animation = `slideToast linear 0.3s, fadeOut linear 1s ${delay}s forwards`
+            toast.classList.add('toast', `toast--${type}`)
+            toast.innerHTML = `
+                <div class="toast__icon">
+                    <i class="${icon}"></i>
+                </div>
+                <div class="toast__body">
+                    <div class="toast__title"> ${title}</div>
+                    <div class="toast__content">${message}</div>
+                </div>
+                <div class="toast__close">
+                    <i class="ti-close"></i>
+                </div>
+            `;
+            main.appendChild(toast)
+
+            // Auto remove
+            const autoRemove = setTimeout(() =>{
+                main.removeChild(toast)
+                
+            },duration + 1000)
+
+            // Remove when click x
+            toast.onclick = (e) => {
+                if (e.target.closest('.toast__close')){
+                    main.removeChild(toast)
+                    clearTimeout(autoRemove)
+                }
+            }
+        }
+        
+        const successBtn = document.querySelector('.btn.btn--success')
+        const errorBtn = document.querySelector('.btn.btn--error')
+        successBtn.onclick = () => showSuccessToast()
+        errorBtn.onclick = () => showErrorToast()
+        
+        
+        
+        function showSuccessToast(){
+            toast({
+            title: 'Success',
+            message: 'Your process has been completed successfully',
+            type: 'success',
+            duration: 1000
+        })  
+        }
+        function showErrorToast(){
+            toast({
+            title: 'Error',
+            message: 'Your process has a big error to solve',
+            type: 'error',
+            duration: 3000
+            })
+        }
+    </script>
+</body>
+</html> 

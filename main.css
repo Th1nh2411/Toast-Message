@@ -1,0 +1,156 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+:root {
+    --success-color: #009703;
+    --error-color: #ff0015;
+    --warning-color: #e8d500;
+    --info-color: #0070e8;
+}
+
+body {
+    display: flex;
+}
+
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 400px;
+    max-width: 400px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px 30px;
+    border-left: 5px solid var(--success-color);
+    z-index: 999999;
+    transition: all linear 0.3s;
+}
+
+.toast+.toast {
+    margin-top: 20px;
+}
+
+.toast__icon i {
+    font-size: 24px;
+    color: var(--success-color);
+    font-weight: 800;
+}
+
+.toast__body {
+    margin-left: 20px;
+    flex: 1;
+    color: #333;
+    max-width: 250px;
+}
+
+.toast__title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.toast__content {}
+
+.toast__close {
+    font-weight: 800;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.toast__close:hover {
+    opacity: 0.7;
+}
+
+.toast--success {
+    border-color: var(--success-color);
+}
+
+.toast--success .toast__icon i {
+    color: var(--success-color);
+}
+
+.toast--warning {
+    border-color: var(--warning-color);
+}
+
+.toast--warning .toast__icon i {
+    color: var(--warning-color);
+}
+
+.toast--error {
+    border-color: var(--error-color);
+}
+
+.toast--error .toast__icon i {
+    color: var(--error-color);
+}
+
+.toast--info {
+    border-color: var(--info-color);
+}
+
+.toast--info .toast__icon i {
+    color: var(--info-color);
+}
+
+/* Btn */
+
+.btnToast {
+    margin: 250px auto;
+    display: flex;
+    color: #fff;
+}
+
+.btn {
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn.btn--success {
+    background-color: var(--success-color);
+}
+
+.btn.btn--error {
+    background-color: var(--error-color);
+}
+
+.btn+.btn {
+    margin-left: 10px;
+}
+
+@keyframes slideToast {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
